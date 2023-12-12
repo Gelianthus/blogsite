@@ -1,27 +1,22 @@
-"use client";
+import getBlogs from "@/lib/mongoose/crud/getBlogs";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
+import Main from "@/components/main/Main";
 
-import Image from "next/image";
-import { useSession, signIn } from "next-auth/react";
+const fetchBlogs = async () => {
+	const blogs = await getBlogs();
+	return blogs;
+};
 
-export default function Home() {
-	const { data: session, status } = useSession();
+async function HomePage() {
+	const blogs = await fetchBlogs();
 	return (
-		<main>
-			{status === "authenticated" ? (
-				<h1 className="mx-auto p-16 text-center text-4xl text-teal-700">
-					You are signed in
-				</h1>
-			) : (
-				<h1 className="mx-auto p-16 text-center text-4xl text-teal-700">
-					You are signed out
-				</h1>
-			)}
-			<button
-				className="bg-gray-900 p-4 block mx-auto my-8 text-lg text-neutral-50 rounded"
-				onClick={() => signIn("google")}
-			>
-				{status === "authenticated" ? "Sign out" : "Sign in"}
-			</button>
-		</main>
+		<div className="flex flex-col min-h-screen">
+			<Header />
+			<Main blogs={blogs} />
+			<Footer />
+		</div>
 	);
 }
+
+export default HomePage;

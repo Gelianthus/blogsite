@@ -1,5 +1,7 @@
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
+import mongoConnection from "@/lib/mongoose/mongoConnection";
+import User from "@/lib/mongoose/models/User";
 
 const handler = NextAuth({
 	providers: [
@@ -10,7 +12,29 @@ const handler = NextAuth({
 	],
 	callbacks: {
 		async signIn({ user }) {
-			return true;
+			await mongoConnection();
+			try {
+				const profileExist = await User.findOne({
+					email: user.email,
+				});
+
+				if (!profileExist) {
+					await User.create({
+						name: user.name,
+						email: user.email,
+						profile_pic: {
+							img_src: user.image,
+							img_alt: `Profile picture of ${user.name}`,
+						},
+					});
+					return true;
+				}
+
+				return true;
+			} catch (error) {
+				console.error(error);
+				return false;
+			}
 		},
 	},
 	secret: process.env.NEXTAUTH_SECRET,
