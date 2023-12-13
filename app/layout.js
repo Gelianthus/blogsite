@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Provider from "@/components/Provider";
 import { CookiesProvider } from "next-client-cookies/server";
-import { DarkModeContextProvider } from "@/contexts/DarkMode";
+import { DarkModeContextProvider } from "@/contexts/DarkModeContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,9 +22,9 @@ export default function RootLayout({ children }) {
 			</head>
 			<body className={inter.className}>
 				<Provider>
-					<DarkModeContextProvider>
-						<CookiesProvider>{children}</CookiesProvider>
-					</DarkModeContextProvider>
+					<CookiesProvider>
+						<DarkModeContextProvider>{children}</DarkModeContextProvider>
+					</CookiesProvider>
 				</Provider>
 			</body>
 		</html>

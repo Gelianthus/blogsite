@@ -1,28 +1,42 @@
 "use client";
 
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useContext } from "react";
+import { DarkModeContext } from "@/contexts/DarkModeContext";
+import Link from "next/link";
 import Image from "next/image";
 
 function HeaderNav() {
 	const { data: session, status } = useSession();
+	const { darkMode, setDarkMode } = useContext(DarkModeContext);
+
 	return (
-		<nav>
-			<button onClick={() => signIn("google")}>
-				{status === "authenticated" ? "Sign out" : "Sign in"}
+		<nav className="hidden sm:flex flex-row gap-4 w-fit ml-auto items-center">
+			<button onClick={() => setDarkMode((prevState) => !prevState)}>
+				<span className="material-symbols-outlined size-32 align-middle">
+					dark_mode
+				</span>
 			</button>
-			<span>
-				{status === "authenticated"
-					? "You are signed in"
-					: "You are signed out"}
-			</span>
-			{status === "authenticated" && (
-				<Image
-					src={session.user.image}
-					alt={`profile picture of ${session.user.name}`}
-					width={120}
-					height={120}
-					className="w-8 h-8 rounded-full"
-				/>
+			{status === "authenticated" ? (
+				<button onClick={() => signOut()}>
+					<Image
+						src={session?.user.image}
+						alt={`Profile picture of ${session?.user.name}`}
+						width={240}
+						height={240}
+						className="block w-8 h-8 rounded-full"
+					/>
+				</button>
+			) : (
+				<button onClick={() => signIn("google")}>
+					<Image
+						src={"/images/default_user_img.webp"}
+						alt="Default image for user"
+						width={240}
+						height={240}
+						className="block w-8 h-8 rounded-full"
+					/>
+				</button>
 			)}
 		</nav>
 	);

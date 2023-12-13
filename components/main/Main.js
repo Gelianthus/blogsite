@@ -1,32 +1,33 @@
 "use client";
 
 import { useContext } from "react";
-import { DarkModeContext } from "@/contexts/DarkMode";
+import { DarkModeContext } from "@/contexts/DarkModeContext";
+import BlogCard from "./BlogCard";
 
 function Main({ blogs }) {
-	const { darkMode, setDarkMode } = useContext(DarkModeContext);
+	const { darkMode } = useContext(DarkModeContext);
 
 	return (
 		<main
 			className={`${
-				darkMode ? "bg-gray-950 text-neutral-50" : "bg-white text-neutral-800"
+				darkMode
+					? "bg-teal-950 text-neutral-50"
+					: "bg-emerald-50 text-neutral-700"
 			} flex-grow`}
 		>
-			<h1>Expressing my thoughts and opinions!</h1>
-
-			<ul>
-				{blogs.map((blog) => {
-					const { _id, title } = blog;
-					return (
-						<li key={_id}>
-							<p>{title}</p>
-						</li>
-					);
-				})}
-			</ul>
-			<button onClick={() => setDarkMode((prevState) => !prevState)}>
-				Toggle
-			</button>
+			<div>
+				<h2>Blogs</h2>
+				<ul>
+					{blogs.map((blog) => {
+						return (
+							<BlogCard
+								key={blog._id}
+								blog={blog}
+							/>
+						);
+					})}
+				</ul>
+			</div>
 		</main>
 	);
 }
