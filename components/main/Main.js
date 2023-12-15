@@ -10,24 +10,24 @@ function Main({ blogs }) {
 	return (
 		<main
 			className={`${
-				darkMode
-					? "bg-teal-950 text-neutral-50"
-					: "bg-emerald-50 text-neutral-700"
-			} flex-grow`}
+				darkMode ? "bg-zinc-800 text-neutral-50" : "bg-white text-neutral-700"
+			} flex-grow p-8`}
 		>
-			<div>
-				<h2>Blogs</h2>
-				<ul>
-					{blogs.map((blog) => {
-						return (
-							<BlogCard
-								key={blog._id}
-								blog={blog}
-							/>
-						);
-					})}
-				</ul>
-			</div>
+			{/* <h1 className="text-6xl font-bold text-center my-8">
+				Hey blog,
+				<br /> welcome to my guys!
+			</h1> */}
+
+			<ul id={"blogs"}>
+				{blogs.map((blog) => {
+					return (
+						<BlogCard
+							key={blog._id}
+							blog={blog}
+						/>
+					);
+				})}
+			</ul>
 		</main>
 	);
 }

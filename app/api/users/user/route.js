@@ -2,7 +2,7 @@ import mongoConnection from "@/lib/mongoose/mongoConnection";
 import User from "@/lib/mongoose/models/User";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req, res) {
 	await mongoConnection();
 	const { searchParams } = new URL(req.url);
 	const useremail = searchParams.get("useremail");
