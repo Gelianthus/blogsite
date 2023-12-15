@@ -22,7 +22,9 @@ async function BlogPage({ params }) {
 
 	const parsedBlogId = JSON.parse(JSON.stringify(blog._id));
 	const parsedRatings = JSON.parse(JSON.stringify(ratings));
-	const parsedBlogComments = JSON.parse(JSON.stringify(blogComments));
+	const parsedBlogComments = blogComments.map((blog) => {
+		return JSON.parse(JSON.stringify(blog));
+	});
 
 	return (
 		<main>
