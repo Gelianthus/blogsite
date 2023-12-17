@@ -55,9 +55,31 @@ span.wght-700 {
     font-variation-settings: 'wght' 700;
 }
 
-.loading-spinner {
-    width: 48px;
-    height: 48px;
+.loading-spinner-small {
+    width: 32px;
+    height: 32px;
+    border: 5px solid #FFF;
+    border-bottom-color: rgb(16 185 129);
+    border-radius: 50%;
+    display: block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.loading-spinner-medium {
+    width: 44px;
+    height: 44px;
+    border: 5px solid #FFF;
+    border-bottom-color: rgb(16 185 129);
+    border-radius: 50%;
+    display: block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.loading-spinner-big {
+    width: 60px;
+    height: 60px;
     border: 5px solid #FFF;
     border-bottom-color: rgb(16 185 129);
     border-radius: 50%;

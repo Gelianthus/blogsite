@@ -3,13 +3,7 @@ import HeaderComponent from "@/components/header/HeaderComponent";
 import MainComponent from "@/components/main/MainComponent";
 
 async function HomePage() {
-	return (
-		<div className="flex flex-col min-h-screen">
-			<HeaderComponent />
-			<MainComponent />
-			<Footer />
-		</div>
-	);
+	return <MainComponent />;
 }
 
 export default HomePage;
