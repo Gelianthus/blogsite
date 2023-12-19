@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
-import { useSession } from "next-auth/react";
+import { UserContext } from "@/contexts/UserContext";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 
 function UserFeedback({ ratings, comments, blog_id }) {
@@ -10,13 +11,15 @@ function UserFeedback({ ratings, comments, blog_id }) {
 	const { liked_by, disliked_by } = ratings;
 
 	const { darkMode } = useContext(DarkModeContext);
+	const { user, setUser } = useContext(UserContext);
 
-	const [user, setUser] = useState(null);
 	const [blogComments, setBlogComments] = useState(comments);
 	const [comment, setComment] = useState("");
 	const [likedBy, setLikedBy] = useState(liked_by);
 	const [dislikedBy, setDislikedBy] = useState(disliked_by);
 	const [formVisible, setFormVisible] = useState(false);
+
+	const textareaRef = useRef(null);
 
 	useEffect(() => {
 		async function getUser() {
@@ -26,16 +29,16 @@ function UserFeedback({ ratings, comments, blog_id }) {
 				);
 				if (res.ok) {
 					const data = await res.json();
-
 					setUser(data.user);
 				} else {
+					const data = await res.json();
 					window.alert(data.message);
 				}
 			} catch (error) {
 				console.error(error);
 			}
 		}
-		getUser();
+		status === "authenticated" && getUser();
 	}, [status]);
 
 	const rateBlogHandle = async (action) => {
@@ -56,7 +59,6 @@ function UserFeedback({ ratings, comments, blog_id }) {
 			if (res.ok) {
 				const data = await res.json();
 				const ratings = data.updatedBlog.ratings;
-
 				setLikedBy(ratings.liked_by);
 				setDislikedBy(ratings.disliked_by);
 			}
@@ -81,9 +83,13 @@ function UserFeedback({ ratings, comments, blog_id }) {
 			if (res.ok) {
 				const data = await res.json();
 				setBlogComments(data.newComments);
+				setComment("");
+				textareaRef.current.value = "";
 			} else {
 				const data = await res.json();
 				window.alert(data.message);
+				setComment("");
+				textareaRef.current.value = "";
 			}
 		} catch (error) {
 			console.error(error);
@@ -150,6 +156,7 @@ function UserFeedback({ ratings, comments, blog_id }) {
 				}}
 			>
 				<textarea
+					ref={textareaRef}
 					required
 					maxLength={420}
 					className={`resize-none w-full outline-emerald-500 rounded h-64 ${
@@ -185,12 +192,13 @@ function UserFeedback({ ratings, comments, blog_id }) {
 						>
 							<div className="flex flex-row gap-2 items-center mb-2">
 								<Image
-									src={profile_pic.img_src}
-									alt={profile_pic.img_alt}
+									src={profile_pic?.img_src}
+									alt={profile_pic?.img_alt}
 									height={120}
 									width={120}
 									className="block w-8 h-8 rounded-full"
 								/>
+
 								<p className="font-bold">{name}</p>
 							</div>
 

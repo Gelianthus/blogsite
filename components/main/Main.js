@@ -1,11 +1,17 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
 import BlogCard from "../blogs/BlogCard";
+import { useRouter } from "next/navigation";
 
 function Main({ blogs }) {
 	const { darkMode } = useContext(DarkModeContext);
+	const router = useRouter();
+
+	useEffect(() => {
+		router.refresh();
+	}, []);
 
 	return (
 		<main

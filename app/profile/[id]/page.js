@@ -1,8 +1,18 @@
 import Profile from "@/components/Profile";
+import getUser from "@/lib/mongoose/crud/getUser";
 
-function ProfilePage({ params }) {
+const fetchUser = async (id) => {
+	const user = await getUser(id);
+	return user;
+};
+
+async function ProfilePage({ params }) {
 	const user_id = params.id;
-	return <Profile user_id={user_id} />;
+
+	const user = await fetchUser(user_id);
+	const parsedUser = JSON.parse(JSON.stringify(user));
+
+	return <Profile user={parsedUser} />;
 }
 
 export default ProfilePage;

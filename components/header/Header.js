@@ -1,8 +1,7 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import HeaderNav from "./HeaderNav";
 import MobileHeaderNav from "./MobileHeaderNav";
 import Link from "next/link";
@@ -10,31 +9,7 @@ import Image from "next/image";
 import PageLinks from "../PageLinks";
 
 function Header() {
-	const { data: session, status } = useSession();
 	const { darkMode } = useContext(DarkModeContext);
-
-	const [user, setUser] = useState(null);
-
-	useEffect(() => {
-		async function getUser() {
-			try {
-				const res = await fetch(
-					`/api/users/user?useremail=${session?.user.email}`
-				);
-				if (res.ok) {
-					const data = await res.json();
-
-					setUser(data.user);
-				} else {
-					const data = await res.json();
-					window.alert(data.message);
-				}
-			} catch (error) {
-				console.error(error);
-			}
-		}
-		getUser();
-	}, [status]);
 
 	return (
 		<header
@@ -66,14 +41,8 @@ function Header() {
 				</nav>
 			</div>
 
-			<HeaderNav
-				user={user}
-				setUser={setUser}
-			/>
-			<MobileHeaderNav
-				user={user}
-				setUser={setUser}
-			/>
+			<HeaderNav />
+			<MobileHeaderNav />
 		</header>
 	);
 }

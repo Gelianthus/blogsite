@@ -1,11 +1,9 @@
-function YourLikesPage() {
-	return (
-		<main
-			className={`${
-				darkMode ? "bg-zinc-800 text-neutral-50" : "bg-white text-neutral-700"
-			} flex-grow p-8`}
-		></main>
-	);
+import YourLikes from "@/components/YourLikes";
+
+async function YourLikesPage({ params }) {
+	const user_id = params.id;
+
+	return <YourLikes />;
 }
 
 export default YourLikesPage;

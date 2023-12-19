@@ -5,6 +5,7 @@ import { CookiesProvider } from "next-client-cookies/server";
 import { DarkModeContextProvider } from "@/contexts/DarkModeContext";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
+import { UserContextProvider } from "@/contexts/UserContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,11 @@ export default function RootLayout({ children }) {
 		>
 			<head>
 				<link
+					rel="icon"
+					href="/images/logo.webp"
+					sizes="any"
+				/>
+				<link
 					href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 					rel="stylesheet"
 				/>
@@ -29,11 +35,13 @@ export default function RootLayout({ children }) {
 				<Provider>
 					<CookiesProvider>
 						<DarkModeContextProvider>
-							<div className="flex flex-col min-h-screen">
-								<Header />
-								{children}
-								<Footer />
-							</div>
+							<UserContextProvider>
+								<div className="flex flex-col min-h-screen">
+									<Header />
+									{children}
+									<Footer />
+								</div>
+							</UserContextProvider>
 						</DarkModeContextProvider>
 					</CookiesProvider>
 				</Provider>

@@ -2,13 +2,39 @@
 
 import Image from "next/image";
 import UserFeedback from "./UserFeedback";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { UserContext } from "@/contexts/UserContext";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
+import { signIn, useSession } from "next-auth/react";
 
 function Blog({ blog, blogComments }) {
 	const { darkMode } = useContext(DarkModeContext);
+	const { user, setUser } = useContext(UserContext);
+
+	const { data: session, status } = useSession();
+
 	const { _id, title, subtitle, ratings, content, thumbnail_img } = blog;
 	const { img_src, img_alt } = thumbnail_img;
+
+	useEffect(() => {
+		async function getUser() {
+			try {
+				const res = await fetch(
+					`/api/users/user?useremail=${session?.user.email}`
+				);
+				if (res.ok) {
+					const data = await res.json();
+					setUser(data.user);
+				} else {
+					const data = await res.json();
+					window.alert(data.message);
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		}
+		getUser();
+	}, [status]);
 
 	return (
 		<main
@@ -50,11 +76,27 @@ function Blog({ blog, blogComments }) {
 					// return <p key={index}>{text}</p>;
 				})}
 			</section>
-			<UserFeedback
-				ratings={ratings}
-				comments={blogComments}
-				blog_id={_id}
-			/>
+			{user ? (
+				<UserFeedback
+					ratings={ratings}
+					comments={blogComments}
+					blog_id={_id}
+				/>
+			) : (
+				<div className="my-8">
+					<p className="text-2xl font-semibold text-center mb-4">
+						Must be signed in to give feedback
+					</p>
+					<button
+						className={`flex flex-row gap-2 items-center mx-auto px-4 py-2 font-semibold rounded bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700`}
+						onClick={() => signIn("google")}
+					>
+						<span>Sign in</span>
+
+						<span className="material-symbols-outlined">login</span>
+					</button>
+				</div>
+			)}
 		</main>
 	);
 }

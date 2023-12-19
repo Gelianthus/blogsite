@@ -3,16 +3,39 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useContext, useState, useEffect, useRef } from "react";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
+import { UserContext } from "@/contexts/UserContext";
 import Link from "next/link";
 import Image from "next/image";
 import PageLinks from "../PageLinks";
 
-function MobileHeaderNav({ user, setUser }) {
-	const { status } = useSession();
+function MobileHeaderNav() {
+	const { data: session, status } = useSession();
 	const { darkMode, setDarkMode } = useContext(DarkModeContext);
+	const { user, setUser } = useContext(UserContext);
 
 	const navContainerRef = useRef(null);
 	const [menuVisible, setMenuVisible] = useState(false);
+
+	useEffect(() => {
+		async function getUser() {
+			try {
+				const res = await fetch(
+					`/api/users/user?useremail=${session?.user.email}`
+				);
+				if (res.ok) {
+					const data = await res.json();
+
+					setUser(data.user);
+				} else {
+					const data = await res.json();
+					window.alert(data.message);
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		}
+		status === "authenticated" && getUser();
+	}, [status]);
 
 	useEffect(() => {
 		const handleClickOutside = (event) => {
@@ -56,6 +79,7 @@ function MobileHeaderNav({ user, setUser }) {
 				</div>
 				<hr className="border-emerald-500" />
 				<Link
+					onClick={() => setMenuVisible(false)}
 					className={`${
 						user === null ? "pointer-events-none" : ""
 					} flex flex-row gap-2 items-center p-4 justify-end hover:text-blue-500 active:text-blue-600`}

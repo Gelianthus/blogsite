@@ -13,9 +13,11 @@ export async function PUT(req, res) {
 		});
 
 		if (submitComment) {
-			const newComments = await Comment.find({ comment_for: blog_id });
+			const newComments = await Comment.find({ comment_for: blog_id }).populate(
+				"comment_by"
+			);
 
-			return NextResponse.json({ newComments });
+			return NextResponse.json({ newComments: newComments }, { status: 200 });
 		} else {
 			return NextResponse.json(
 				{ message: "An error occured while performning this action." },

@@ -3,17 +3,41 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useContext, useState, useEffect, useRef } from "react";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
+import { UserContext } from "@/contexts/UserContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
-function HeaderNav({ user, setUser }) {
+function HeaderNav() {
 	const router = useRouter();
 	const { data: session, status } = useSession();
 	const { darkMode, setDarkMode } = useContext(DarkModeContext);
+	const { user, setUser } = useContext(UserContext);
 
 	const navRef = useRef(null);
 	const [menuVisible, setMenuVisible] = useState(false);
+
+	useEffect(() => {
+		async function getUser() {
+			try {
+				const res = await fetch(
+					`/api/users/user?useremail=${session?.user.email}`
+				);
+				if (res.ok) {
+					const data = await res.json();
+
+					setUser(data.user);
+				} else {
+					const data = await res.json();
+					window.alert(data.message);
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		}
+
+		status === "authenticated" && getUser();
+	}, [status]);
 
 	useEffect(() => {
 		const handleClickOutside = (event) => {
@@ -55,9 +79,8 @@ function HeaderNav({ user, setUser }) {
 			) : (
 				<>
 					<button
-						disabled={user === null}
 						onClick={() => setMenuVisible((prevState) => !prevState)}
-						className="hover:text-sky-500 active:text-sky-700"
+						className={` hover:text-sky-500 active:text-sky-700`}
 					>
 						<Image
 							src={session?.user.image}
@@ -75,7 +98,10 @@ function HeaderNav({ user, setUser }) {
 						}`}
 					>
 						<Link
-							className="flex flex-row gap-2 items-center p-4 justify-end hover:text-blue-500 active:text-blue-600"
+							onClick={() => setMenuVisible(false)}
+							className={`${
+								!user && "pointer-events-none"
+							} flex flex-row gap-2 items-center p-4 justify-end hover:text-blue-500 active:text-blue-600`}
 							href={`/profile/${user?._id}`}
 						>
 							<span>Profile</span>
