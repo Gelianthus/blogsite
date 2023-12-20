@@ -70,7 +70,7 @@ function UserFeedback({ ratings, comments, blog_id }) {
 	const commentHandle = async () => {
 		try {
 			const res = await fetch(`/api/blogs/blog/comment-action`, {
-				method: "PUT",
+				method: "POST",
 				headers: {
 					"Content-type": "application/json",
 				},

@@ -2,7 +2,7 @@ import mongoConnection from "@/lib/mongoose/mongoConnection";
 import Comment from "@/lib/mongoose/models/Comment";
 import { NextResponse } from "next/server";
 
-export async function PUT(req, res) {
+export async function POST(req, res) {
 	await mongoConnection();
 	const { blog_id, user_id, comment } = await req.json();
 	try {
