@@ -73,7 +73,6 @@ function Blog({ blog, blogComments }) {
 							{text}
 						</h2>
 					);
-					// return <p key={index}>{text}</p>;
 				})}
 			</section>
 			{user ? (

@@ -37,11 +37,13 @@ function YourComments({ userComments, userId }) {
 				setYourComments(data.newComments);
 				setCommentId("");
 				deleteConfirmationRef.current.close();
+				router.refresh();
 			} else {
 				const data = await res.json();
 				window.alert(data.message);
 				setCommentId("");
 				deleteConfirmationRef.current.close();
+				router.refresh();
 			}
 		} catch (error) {
 			console.error(error);
@@ -69,6 +71,7 @@ function YourComments({ userComments, userId }) {
 				setNewComment("");
 				textareaRef.current.value = "";
 				editCommentRef.current.close("");
+				router.refresh();
 			} else {
 				const data = await res.json();
 				window.alert(data.message);
@@ -76,6 +79,7 @@ function YourComments({ userComments, userId }) {
 				setNewComment("");
 				textareaRef.current.value = "";
 				editCommentRef.current.close("");
+				router.refresh();
 			}
 		} catch (error) {
 			console.error(error);
@@ -93,7 +97,7 @@ function YourComments({ userComments, userId }) {
 					<li
 						className={`${
 							darkMode ? "bg-zinc-900" : "bg-emerald-100"
-						} p-4 my-2 rounded`}
+						} p-4 my-2 rounded text-center`}
 					>
 						You haven't made any comment yet.
 					</li>

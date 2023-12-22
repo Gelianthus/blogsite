@@ -2,22 +2,21 @@
 
 import { useContext } from "react";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
-function YourLikes({ likedBlogs, userId }) {
+function YourLikes({ likedBlogs }) {
 	const { darkMode } = useContext(DarkModeContext);
 	const router = useRouter();
 	const { status } = useSession();
-
-	const [yourLikes, setYourLikes] = useState(likedBlogs);
 
 	useEffect(() => {
 		if (status === "unauthenticated") {
 			router.push("/");
 		}
+		router.refresh();
 	}, [status]);
 
 	return (
@@ -26,7 +25,7 @@ function YourLikes({ likedBlogs, userId }) {
 				darkMode ? "bg-zinc-800 text-neutral-50" : "bg-white text-neutral-700"
 			} my-8`}
 		>
-			{yourLikes.length < 1 && (
+			{likedBlogs.length < 1 && (
 				<li
 					className={`${
 						darkMode ? "bg-zinc-900" : "bg-emerald-100"
@@ -35,7 +34,7 @@ function YourLikes({ likedBlogs, userId }) {
 					You haven't liked anything yet.
 				</li>
 			)}
-			{yourLikes.map((blog) => {
+			{likedBlogs.map((blog) => {
 				const { _id, title } = blog;
 				return (
 					<li

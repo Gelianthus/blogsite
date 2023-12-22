@@ -11,7 +11,7 @@ function BlogCard({ blog, darkMode }) {
 			<Link
 				className={`${
 					darkMode ? "bg-zinc-900" : "bg-emerald-50"
-				}  p-4 flex flex-row gap-4 border border-emerald-500`}
+				} rounded  p-4 flex flex-row gap-4 border border-emerald-500 hover:border-emerald-800`}
 				href={`/blogs/${_id}`}
 			>
 				<Image
@@ -25,16 +25,13 @@ function BlogCard({ blog, darkMode }) {
 				<div
 					className={` ${
 						darkMode ? "bg-zinc-900" : "bg-emerald-50"
-					} flex flex-col justify-between flex-grow`}
+					} space-y-2 my-auto`}
 				>
-					<div>
-						<h3 className="text-emerald-500 font-semibold text-2xl mb-2">
-							{title}
-						</h3>
-						<p className="font-semibold ">{subtitle}</p>
-					</div>
+					<h3 className="text-emerald-500 font-semibold text-2xl">{title}</h3>
+					<p className="font-semibold ">{subtitle}</p>
 
-					<div className="flex flex-row gap-2 items-center my-4 justify-center">
+					<p className="text-xs font-bold  ">{created_at.slice(0, 10)}</p>
+					{/* <div className="flex flex-row gap-2 items-center my-4 justify-center">
 						<div
 							className={`flex flex-row gap-2 items-center p-2 rounded ${
 								darkMode ? "bg-zinc-950" : "bg-white"
@@ -53,10 +50,7 @@ function BlogCard({ blog, darkMode }) {
 							<span className="material-symbols-outlined">thumb_down</span>
 							<span>{disliked_by.length}</span>
 						</div>
-					</div>
-					<p className="text-xs font-bold  text-end">
-						{created_at.slice(0, 10)}
-					</p>
+					</div> */}
 				</div>
 			</Link>
 		</li>
