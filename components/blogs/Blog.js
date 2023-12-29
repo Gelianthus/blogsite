@@ -6,6 +6,7 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "@/contexts/UserContext";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
 import { signIn, useSession } from "next-auth/react";
+import { kanit, archivo } from "@/lib/fonts";
 
 function Blog({ blog, blogComments }) {
 	const { darkMode } = useContext(DarkModeContext);
@@ -42,11 +43,17 @@ function Blog({ blog, blogComments }) {
 				darkMode ? "bg-zinc-800 text-neutral-50" : "bg-white text-neutral-700"
 			} flex-grow p-8`}
 		>
-			<h1 className="text-4xl font-semibold text-center text-emerald-500">
+			<h1
+				className={`${kanit.className} text-4xl font-semibold text-center text-emerald-500`}
+			>
 				{title}
 			</h1>
-			<p className="text-2xl font-semibold text-center mb-12">{subtitle}</p>
-			<div className={`${darkMode ? "bg-zinc-900 " : "bg-emrald-100 "}`}>
+			<p
+				className={`${kanit.className} text-2xl font-semibold text-center mb-12 `}
+			>
+				{subtitle}
+			</p>
+			<div className={`${darkMode ? "bg-zinc-900 " : "bg-neutral-200 "}`}>
 				<Image
 					src={img_src}
 					alt={img_alt}
@@ -67,7 +74,7 @@ function Blog({ blog, blogComments }) {
 						</p>
 					) : (
 						<h2
-							className="font-semibold my-4 text-emerald-500"
+							className={` font-semibold my-4 text-emerald-500`}
 							key={index}
 						>
 							{text}

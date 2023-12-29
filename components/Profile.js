@@ -41,27 +41,23 @@ function Profile({ user, userComments, likedBlogs }) {
 				{name} | {email}
 			</h1>
 
-			<nav className="flex flex-row gap-2 items-center justify-center my-8">
+			<nav className="flex flex-row gap-2 items-center my-8">
 				<div
-					className={`p-1 ${currentTab === 1 ? "bg-emerald-500" : ""} rounded`}
+					className={`p-1 ${currentTab === 1 && "text-emerald-500"} rounded`}
 				>
 					<button
 						onClick={() => setCurrentTab(1)}
-						className={`${
-							darkMode ? "bg-zinc-900" : "bg-emerald-100"
-						} p-4 hover:text-emerald-600 active:text-emerald-700 rounded`}
+						className={` hover:text-emerald-600 active:text-emerald-700 rounded font-bold text-lg`}
 					>
 						Your comments
 					</button>
 				</div>
 				<div
-					className={`p-1 ${currentTab === 2 ? "bg-emerald-500" : ""} rounded`}
+					className={`p-1 ${currentTab === 2 && "text-emerald-500"} rounded`}
 				>
 					<button
 						onClick={() => setCurrentTab(2)}
-						className={`${
-							darkMode ? "bg-zinc-900" : "bg-emerald-100"
-						} p-4 hover:text-emerald-600 active:text-emerald-700 rounded`}
+						className={` hover:text-emerald-600 active:text-emerald-700 rounded font-bold text-lg`}
 					>
 						Your likes
 					</button>

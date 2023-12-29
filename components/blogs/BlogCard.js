@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { kanit } from "@/lib/fonts";
 
 function BlogCard({ blog, darkMode }) {
 	const { _id, thumbnail_img, title, subtitle, created_at, ratings } = blog;
@@ -7,28 +8,34 @@ function BlogCard({ blog, darkMode }) {
 	const { img_src, img_alt } = thumbnail_img;
 
 	return (
-		<li className="p-4">
+		<div className={`p-4 `}>
 			<Link
 				className={`${
-					darkMode ? "bg-zinc-900" : "bg-emerald-50"
-				} rounded  p-4 flex flex-row gap-4 border border-emerald-500 hover:border-emerald-800`}
+					darkMode ? "bg-zinc-900" : "bg-neutral-200"
+				}  p-4 flex flex-row  flex-wrap gap-4
+				
+				`}
 				href={`/blogs/${_id}`}
 			>
 				<Image
 					src={img_src}
 					alt={img_alt}
-					width={280}
-					height={280}
-					className="block w-48 h-48 mr-4"
+					width={200}
+					height={200}
+					className="block"
 				/>
 
 				<div
 					className={` ${
-						darkMode ? "bg-zinc-900" : "bg-emerald-50"
-					} space-y-2 my-auto`}
+						darkMode ? "bg-zinc-900" : "bg-neutral-200"
+					} min-w-fit space-y-2 my-auto break-all`}
 				>
-					<h3 className="text-emerald-500 font-semibold text-2xl">{title}</h3>
-					<p className="font-semibold ">{subtitle}</p>
+					<h3
+						className={`${kanit.className} text-emerald-500 font-semibold text-2xl`}
+					>
+						{title}
+					</h3>
+					<p className={`${kanit.className} font-semibold`}>{subtitle}</p>
 
 					<p className="text-xs font-bold  ">{created_at.slice(0, 10)}</p>
 					{/* <div className="flex flex-row gap-2 items-center my-4 justify-center">
@@ -53,7 +60,7 @@ function BlogCard({ blog, darkMode }) {
 					</div> */}
 				</div>
 			</Link>
-		</li>
+		</div>
 	);
 }
 

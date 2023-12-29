@@ -88,15 +88,11 @@ function YourComments({ userComments, userId }) {
 
 	return (
 		<>
-			<ul
-				className={`${
-					darkMode ? "bg-zinc-800 text-neutral-50" : "bg-white text-neutral-700"
-				} my-8`}
-			>
+			<ul className="my-8">
 				{yourComments.length < 1 && (
 					<li
 						className={`${
-							darkMode ? "bg-zinc-900" : "bg-emerald-100"
+							darkMode ? "bg-zinc-900" : "bg-neutral-600 text-neutral-50"
 						} p-4 my-2 rounded text-center`}
 					>
 						You haven't made any comment yet.
@@ -108,7 +104,7 @@ function YourComments({ userComments, userId }) {
 						<li
 							key={_id}
 							className={`${
-								darkMode ? "bg-zinc-900" : "bg-emerald-100"
+								darkMode ? "bg-zinc-900" : "bg-neutral-300"
 							} p-4 my-2 rounded`}
 						>
 							<div className="flex flex-row gap-4 items-center justify-between">
@@ -148,7 +144,7 @@ function YourComments({ userComments, userId }) {
 							</div>
 							<p
 								className={`${
-									darkMode ? "bg-zinc-800" : "bg-white"
+									darkMode ? "bg-zinc-800" : "bg-white text-neutral-700"
 								} p-2 rounded mt-4`}
 							>
 								"{comment}"
@@ -160,13 +156,13 @@ function YourComments({ userComments, userId }) {
 			<dialog
 				className={`${
 					darkMode
-						? "bg-zinc-950 text-neutral-50"
-						: "bg-emerald-100 text-neutral-800"
+						? "bg-zinc-950 text-neutral-50 border-2 border-emerald-500"
+						: "bg-neutral-100 text-neutral-800 border-2 border-gray-900"
 				} p-4 rounded`}
 				ref={deleteConfirmationRef}
 			>
-				<p className="text-center my-4">Delete comment?</p>
-				<div className=" flex flex-row gap-2 items-center justify-center">
+				<p className="text-center my-4 font-semibold">Delete comment?</p>
+				<div className=" flex flex-row gap-2 items-center justify-center text-neutral-50">
 					<button
 						onClick={() => {
 							setCommentId("");
@@ -188,8 +184,8 @@ function YourComments({ userComments, userId }) {
 				ref={editCommentRef}
 				className={`${
 					darkMode
-						? "bg-zinc-950 text-neutral-50"
-						: "bg-emerald-100 text-neutral-800"
+						? "bg-zinc-950 text-neutral-50 border-2 border-emerald-500"
+						: "bg-neutral-100 text-neutral-800 border-2 border-gray-900"
 				} p-8 rounded`}
 			>
 				<form
@@ -205,7 +201,7 @@ function YourComments({ userComments, userId }) {
 						className="resize-none h-40 w-80 my-8 p-2 text-neutral-700"
 						maxLength={420}
 					/>
-					<div className=" flex flex-row gap-2 items-center justify-center">
+					<div className=" flex flex-row gap-2 items-center justify-center text-neutral-50">
 						<button
 							type="button"
 							onClick={() => {

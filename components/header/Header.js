@@ -7,6 +7,7 @@ import MobileHeaderNav from "./MobileHeaderNav";
 import Link from "next/link";
 import Image from "next/image";
 import PageLinks from "../PageLinks";
+import { bebas_neue } from "@/lib/fonts";
 
 function Header() {
 	const { darkMode } = useContext(DarkModeContext);
@@ -31,12 +32,16 @@ function Header() {
 						height={120}
 						className="block w-12 h-12 rounded-full bg-amber-500"
 					/>
-					<p className="text-xl font-bold leading-none">
+					<p
+						className={`text-xl font-bold leading-none ${bebas_neue.className}`}
+					>
 						<span className="text-emerald-500">Gelianthus</span>' <br />
 						Field
 					</p>
 				</Link>
-				<nav className="hidden sm:flex flex-row gap-4 items-center text-sm md:text-base font-semibold">
+				<nav
+					className={`hidden sm:flex flex-row gap-4 items-center text-sm md:text-base font-semibold`}
+				>
 					<PageLinks />
 				</nav>
 			</div>

@@ -13,7 +13,7 @@ function PageLinks({ setMenuVisible }) {
 				className={`${
 					darkMode
 						? "hover:text-emerald-500 active:text-emerald-600"
-						: "hover:text-amber-500 active:text-amber-600"
+						: "hover:text-emerald-600 active:text-emerald-700"
 				} hidden sm:flex flex-row gap-2 items-center p-4 sm:p-0 justify-end `}
 				href={"/#blogs"}
 			>
@@ -27,7 +27,7 @@ function PageLinks({ setMenuVisible }) {
 				className={`${
 					darkMode
 						? "hover:text-emerald-500 active:text-emerald-600"
-						: "hover:text-amber-500 active:text-amber-600"
+						: "hover:text-emerald-600 active:text-emerald-700"
 				} sm:hidden flex flex-row gap-2 items-center p-4 sm:p-0 justify-end `}
 				href={"/#blogs"}
 			>
@@ -38,7 +38,7 @@ function PageLinks({ setMenuVisible }) {
 				className={`${
 					darkMode
 						? "hover:text-emerald-500 active:text-emerald-600"
-						: "hover:text-amber-500 active:text-amber-600"
+						: "hover:text-emerald-600 active:text-emerald-700"
 				} hidden sm:flex flex-row gap-2 items-center p-4 sm:p-0 justify-end  `}
 				href={"/about"}
 			>
@@ -50,7 +50,7 @@ function PageLinks({ setMenuVisible }) {
 				className={`${
 					darkMode
 						? "hover:text-emerald-500 active:text-emerald-600"
-						: "hover:text-amber-500 active:text-amber-600"
+						: "hover:text-emerald-600 active:text-emerald-700"
 				} sm:hidden flex flex-row gap-2 items-center p-4 sm:p-0 justify-end  `}
 				href={"/about"}
 			>
@@ -61,7 +61,7 @@ function PageLinks({ setMenuVisible }) {
 				className={`${
 					darkMode
 						? "hover:text-emerald-500 active:text-emerald-600"
-						: "hover:text-amber-500 active:text-amber-600"
+						: "hover:text-emerald-600 active:text-emerald-700"
 				} hidden sm:flex flex-row gap-2 items-center p-4 sm:p-0 justify-end  `}
 				href={"/privacy"}
 			>
@@ -73,7 +73,7 @@ function PageLinks({ setMenuVisible }) {
 				className={`${
 					darkMode
 						? "hover:text-emerald-500 active:text-emerald-600"
-						: "hover:text-amber-500 active:text-amber-600"
+						: "hover:text-emerald-600 active:text-emerald-700"
 				} sm:hidden flex flex-row gap-2 items-center p-4 sm:p-0 justify-end  `}
 				href={"/privacy"}
 			>

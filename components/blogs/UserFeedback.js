@@ -98,7 +98,7 @@ function UserFeedback({ ratings, comments, blog_id }) {
 
 	return (
 		<div>
-			<div className="flex flex-row gap-2 items-center py-4">
+			<div className="flex flex-row flex-wrap gap-2 items-center py-4">
 				<button
 					onClick={() => setFormVisible((prevState) => !prevState)}
 					className={`${
@@ -109,39 +109,41 @@ function UserFeedback({ ratings, comments, blog_id }) {
 
 					<span className="material-symbols-outlined">add</span>
 				</button>
-				<button
-					className={`${
-						user === null ? "pointer-events-none" : ""
-					} p-4 rounded flex flex-row gap-2 items-center text-neutral-50 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700`}
-					disabled={user === null}
-					onClick={() => rateBlogHandle("LIKE")}
-				>
-					<span>Like</span>
+				<div className="flex flex-row gap-2 items-center">
+					<button
+						className={`${
+							user === null ? "pointer-events-none" : ""
+						} p-4 rounded flex flex-row gap-2 items-center text-neutral-50 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700`}
+						disabled={user === null}
+						onClick={() => rateBlogHandle("LIKE")}
+					>
+						<span>Like</span>
 
-					<span className="material-symbols-outlined">thumb_up</span>
-				</button>
-				<button
-					className={`${
-						user === null ? "pointer-events-none" : ""
-					} p-4 rounded flex flex-row gap-2 items-center text-neutral-50 bg-rose-500 hover:bg-rose-600 active:bg-rose-700`}
-					disabled={user === null}
-					onClick={() => rateBlogHandle("DISLIKE")}
-				>
-					<span>Dislike</span>
+						<span className="material-symbols-outlined">thumb_up</span>
+					</button>
+					<button
+						className={`${
+							user === null ? "pointer-events-none" : ""
+						} p-4 rounded flex flex-row gap-2 items-center text-neutral-50 bg-rose-500 hover:bg-rose-600 active:bg-rose-700`}
+						disabled={user === null}
+						onClick={() => rateBlogHandle("DISLIKE")}
+					>
+						<span>Dislike</span>
 
-					<span className="material-symbols-outlined">thumb_down</span>
-				</button>
-				<div className="flex flex-row gap-2 items-center ml-4">
+						<span className="material-symbols-outlined">thumb_down</span>
+					</button>
+				</div>
+				<div className="flex flex-row gap-2 items-center">
 					<span
 						className={`p-4 rounded ${
-							darkMode ? "bg-zinc-900" : "bg-emerald-100"
+							darkMode ? "bg-zinc-900" : "bg-neutral-700 text-neutral-50"
 						}`}
 					>
 						Likes: {likedBy.length}
 					</span>
 					<span
 						className={`p-4 rounded ${
-							darkMode ? "bg-zinc-900" : "bg-emerald-100"
+							darkMode ? "bg-zinc-900" : "bg-neutral-700 text-neutral-50"
 						}`}
 					>
 						Dislikes: {dislikedBy.length}
@@ -160,7 +162,7 @@ function UserFeedback({ ratings, comments, blog_id }) {
 					required
 					maxLength={420}
 					className={`resize-none w-full outline-emerald-500 rounded h-64 ${
-						darkMode ? "bg-zinc-900" : "bg-emerald-100"
+						darkMode ? "bg-zinc-900" : "bg-neutral-200"
 					} p-4`}
 					onChange={(e) => setComment(e.target.value)}
 				/>
@@ -187,7 +189,7 @@ function UserFeedback({ ratings, comments, blog_id }) {
 						<div
 							key={_id}
 							className={`${
-								darkMode ? "bg-zinc-900" : "bg-emerald-100"
+								darkMode ? "bg-zinc-900" : "bg-neutral-200"
 							} py-4 px-2 my-4`}
 						>
 							<div className="flex flex-row gap-2 items-center mb-2">

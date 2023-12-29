@@ -26,15 +26,16 @@ function Main({ blogs }) {
 
 			<ul
 				id={"blogs"}
-				className="flex flex-col gap-2 sm:grid sm:grid-cols-2 sm:gap-4"
+				className="space-y-4 w-full md:w-4/5 mx-auto"
 			>
 				{blogs.map((blog) => {
 					return (
-						<BlogCard
-							key={blog._id}
-							blog={blog}
-							darkMode={darkMode}
-						/>
+						<li key={blog._id}>
+							<BlogCard
+								blog={blog}
+								darkMode={darkMode}
+							/>
+						</li>
 					);
 				})}
 			</ul>
