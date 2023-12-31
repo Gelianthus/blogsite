@@ -3,7 +3,7 @@
 import { useEffect, useState, useContext, useRef } from "react";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
 import { UserContext } from "@/contexts/UserContext";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 
 function UserFeedback({ ratings, comments, blog_id }) {

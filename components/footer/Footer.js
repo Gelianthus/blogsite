@@ -9,6 +9,10 @@ import Image from "next/image";
 function Footer() {
 	const { darkMode, setDarkMode } = useContext(DarkModeContext);
 
+	const scrollToTop = () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
+
 	return (
 		<footer
 			className={`${archivo.className} p-4 sm:p-8 bg-zinc-900 text-neutral-50 grid grid-cols-1 sm:grid-cols-2 gap-2`}
@@ -52,6 +56,7 @@ function Footer() {
 				</nav>
 				<div className="flex flex-row flex-wrap gap-2 my-4">
 					<button
+						onClick={scrollToTop}
 						title="Back to top"
 						className="hover:text-emerald-500 active:text-emerald-600 w-fit p-2 bg-zinc-950"
 					>
