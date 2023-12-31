@@ -21,7 +21,7 @@ function Blog({ blog, blogComments }) {
 		async function getUser() {
 			try {
 				const res = await fetch(
-					`/api/users/user?useremail=${session?.user.email}`
+					`/api/users/user?useremail=${session?.user?.email}`
 				);
 				if (res.ok) {
 					const data = await res.json();
@@ -34,7 +34,7 @@ function Blog({ blog, blogComments }) {
 				console.error(error);
 			}
 		}
-		status === "authenticated" && getUser();
+		status === "authenticated" && session && getUser();
 	}, [status]);
 
 	return (
@@ -82,7 +82,7 @@ function Blog({ blog, blogComments }) {
 					);
 				})}
 			</section>
-			{user ? (
+			{user !== null ? (
 				<UserFeedback
 					ratings={ratings}
 					comments={blogComments}
