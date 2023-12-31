@@ -41,7 +41,7 @@ function Blog({ blog, blogComments }) {
 		<main
 			className={`${
 				darkMode ? "bg-zinc-800 text-neutral-50" : "bg-white text-neutral-700"
-			} flex-grow p-8`}
+			} flex-grow p-8 break-all`}
 		>
 			<h1
 				className={`${kanit.className} text-4xl font-semibold text-center text-emerald-500`}

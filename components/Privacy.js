@@ -10,7 +10,7 @@ function Privacy() {
 		<main
 			className={`${
 				darkMode ? "bg-zinc-800 text-neutral-50" : "bg-white text-neutral-700"
-			} flex-grow p-4 sm:p-8 lg:p-16`}
+			} flex-grow p-4 sm:p-8 lg:p-16 break-all`}
 		>
 			<h1
 				className={`${kanit.className} text-center font-bold text-4xl text-emerald-500 mb-2`}
