@@ -3,8 +3,7 @@ import Image from "next/image";
 import { kanit } from "@/lib/fonts";
 
 function BlogCard({ blog, darkMode }) {
-	const { _id, thumbnail_img, title, subtitle, created_at, ratings } = blog;
-	const { liked_by, disliked_by } = ratings;
+	const { _id, thumbnail_img, title, subtitle, created_at } = blog;
 	const { img_src, img_alt } = thumbnail_img;
 
 	return (
@@ -38,26 +37,6 @@ function BlogCard({ blog, darkMode }) {
 					<p className={`${kanit.className} font-semibold`}>{subtitle}</p>
 
 					<p className="text-xs font-bold  ">{created_at.slice(0, 10)}</p>
-					{/* <div className="flex flex-row gap-2 items-center my-4 justify-center">
-						<div
-							className={`flex flex-row gap-2 items-center p-2 rounded ${
-								darkMode ? "bg-zinc-950" : "bg-white"
-							} text-sky-500`}
-						>
-							<span className="material-symbols-outlined size-20">
-								thumb_up
-							</span>
-							<span>{liked_by.length}</span>
-						</div>
-						<div
-							className={`flex flex-row gap-2 items-center p-2 rounded ${
-								darkMode ? "bg-zinc-950" : "bg-white"
-							} text-rose-500`}
-						>
-							<span className="material-symbols-outlined">thumb_down</span>
-							<span>{disliked_by.length}</span>
-						</div>
-					</div> */}
 				</div>
 			</Link>
 		</div>

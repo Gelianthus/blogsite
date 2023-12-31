@@ -6,7 +6,7 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "@/contexts/UserContext";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
 import { signIn, useSession } from "next-auth/react";
-import { kanit, archivo } from "@/lib/fonts";
+import { kanit } from "@/lib/fonts";
 
 function Blog({ blog, blogComments }) {
 	const { darkMode } = useContext(DarkModeContext);
@@ -34,7 +34,7 @@ function Blog({ blog, blogComments }) {
 				console.error(error);
 			}
 		}
-		getUser();
+		status === "authenticated" && getUser();
 	}, [status]);
 
 	return (
