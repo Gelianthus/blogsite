@@ -19,11 +19,11 @@ function Main({ blogs }) {
 				darkMode ? "bg-zinc-800 text-neutral-50" : "bg-white text-neutral-700"
 			} flex-grow p-8`}
 		>
-			<h1 className="text-6xl font-bold text-center my-12">
+			<h1 className="text-6xl font-bold text-center my-12 break-all">
 				Hey blog,
 				<br /> welcome to my guys!
 			</h1>
-			<p className="my-8 w-full md:w-4/5 mx-auto">
+			<p className="my-8 w-full md:w-4/5 mx-auto break-all">
 				<span className="text-yellow-500 font-bold">DISCLAIMER:</span> My
 				intention for writing blogs is to express myself, it's{" "}
 				<b className="text-red-400">NOT</b> primarily to educate. Of course,
