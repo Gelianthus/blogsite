@@ -51,7 +51,7 @@ function About() {
 					</p>
 					<Link
 						className="p-4 font-semibold bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-neutral-50 block my-4 w-fit"
-						href=""
+						href="https://event-planner-gelianthus.vercel.app"
 					>
 						Recent Project{" "}
 						<span className="material-symbols-outlined align-middle">
@@ -76,7 +76,7 @@ function About() {
 					</p>
 					<Link
 						className="p-4 font-semibold bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-neutral-50 block my-4 w-fit"
-						href={""}
+						href={"https://personal-website-gelianthus.vercel.app"}
 					>
 						More about me{" "}
 						<span className="material-symbols-outlined align-middle">

@@ -9,33 +9,35 @@ import { signIn, useSession } from "next-auth/react";
 import { kanit } from "@/lib/fonts";
 
 function Blog({ blog, blogComments }) {
+	const { data: session } = useSession();
 	const { darkMode } = useContext(DarkModeContext);
-	const { user, setUser } = useContext(UserContext);
-
-	const { data: session, status } = useSession();
+	const { setUser } = useContext(UserContext);
 
 	const { _id, title, subtitle, ratings, content, thumbnail_img } = blog;
 	const { img_src, img_alt } = thumbnail_img;
 
-	useEffect(() => {
-		async function getUser() {
-			try {
-				const res = await fetch(
-					`/api/users/user?useremail=${session?.user?.email}`
-				);
-				if (res.ok) {
-					const data = await res.json();
-					setUser(data.user);
-				} else {
-					const data = await res.json();
-					window.alert(data.message);
-				}
-			} catch (error) {
-				console.error(error);
+	const getUser = async () => {
+		try {
+			const res = await fetch(
+				`/api/users/user?useremail=${session?.user?.email}`
+			);
+			if (res.ok) {
+				const data = await res.json();
+				setUser(data.user);
+			} else {
+				const data = await res.json();
+				window.alert(data.message);
 			}
+		} catch (error) {
+			console.error(error);
 		}
-		status === "authenticated" && session && getUser();
-	}, [status]);
+	};
+
+	useEffect(() => {
+		if (session) {
+			getUser();
+		}
+	}, [session]);
 
 	return (
 		<main
@@ -82,7 +84,7 @@ function Blog({ blog, blogComments }) {
 					);
 				})}
 			</section>
-			{user !== null ? (
+			{session ? (
 				<UserFeedback
 					ratings={ratings}
 					comments={blogComments}
