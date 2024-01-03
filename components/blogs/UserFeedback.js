@@ -1,17 +1,15 @@
 "use client";
 
-import { useEffect, useState, useContext, useRef } from "react";
+import { useState, useContext, useRef } from "react";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
 import { UserContext } from "@/contexts/UserContext";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 
 function UserFeedback({ ratings, comments, blog_id }) {
-	const { data: session, status } = useSession();
 	const { liked_by, disliked_by } = ratings;
 
 	const { darkMode } = useContext(DarkModeContext);
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 
 	const [blogComments, setBlogComments] = useState(comments);
 	const [comment, setComment] = useState("");
@@ -20,26 +18,6 @@ function UserFeedback({ ratings, comments, blog_id }) {
 	const [formVisible, setFormVisible] = useState(false);
 
 	const textareaRef = useRef(null);
-
-	useEffect(() => {
-		async function getUser() {
-			try {
-				const res = await fetch(
-					`/api/users/user?useremail=${session?.user.email}`
-				);
-				if (res.ok) {
-					const data = await res.json();
-					setUser(data.user);
-				} else {
-					const data = await res.json();
-					window.alert(data.message);
-				}
-			} catch (error) {
-				console.error(error);
-			}
-		}
-		status === "authenticated" && getUser();
-	}, [status]);
 
 	const rateBlogHandle = async (action) => {
 		try {

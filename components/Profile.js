@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useContext } from "react";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
 import { useRouter } from "next/navigation";
@@ -37,8 +36,8 @@ function Profile({ user, userComments, likedBlogs }) {
 				height={240}
 				className="block mx-auto w-32 h-32 rounded-full mb-4"
 			/>
-			<h1 className="my-4 font-bold text-2xl text-center text-emerald-500">
-				{name} | {email}
+			<h1 className="my-4 font-bold text-2xl text-center text-emerald-500 break-all">
+				{name}
 			</h1>
 
 			<nav className="flex flex-row gap-2 items-center my-8">

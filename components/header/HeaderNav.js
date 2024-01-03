@@ -25,7 +25,6 @@ function HeaderNav() {
 				);
 				if (res.ok) {
 					const data = await res.json();
-
 					setUser(data.user);
 				} else {
 					const data = await res.json();
