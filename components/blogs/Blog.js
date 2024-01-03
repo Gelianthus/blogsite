@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import UserFeedback from "./UserFeedback";
-import { useContext, useEffect } from "react";
-import { UserContext } from "@/contexts/UserContext";
+import { useContext } from "react";
 import { DarkModeContext } from "@/contexts/DarkModeContext";
 import { signIn, useSession } from "next-auth/react";
 import { kanit } from "@/lib/fonts";
@@ -11,33 +10,9 @@ import { kanit } from "@/lib/fonts";
 function Blog({ blog, blogComments }) {
 	const { data: session } = useSession();
 	const { darkMode } = useContext(DarkModeContext);
-	const { setUser } = useContext(UserContext);
 
 	const { _id, title, subtitle, ratings, content, thumbnail_img } = blog;
 	const { img_src, img_alt } = thumbnail_img;
-
-	const getUser = async () => {
-		try {
-			const res = await fetch(
-				`/api/users/user?useremail=${session?.user?.email}`
-			);
-			if (res.ok) {
-				const data = await res.json();
-				setUser(data.user);
-			} else {
-				const data = await res.json();
-				window.alert(data.message);
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	useEffect(() => {
-		if (session) {
-			getUser();
-		}
-	}, [session]);
 
 	return (
 		<main

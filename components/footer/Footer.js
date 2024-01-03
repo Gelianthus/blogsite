@@ -37,7 +37,7 @@ function Footer() {
 				<nav className="flex flex-row sm:flex-col flex-wrap gap-2">
 					<Link
 						className="hover:underline hover:text-emerald-500 active:text-emerald-600 active:underline"
-						href="/"
+						href="/#blogs"
 					>
 						Blogs
 					</Link>
